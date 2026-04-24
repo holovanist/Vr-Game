@@ -8,9 +8,7 @@ public class OpenMenus : MonoBehaviour
     public InputActionProperty MenuButtonAction;
     public GameObject MenuUI;
     public GameObject Camera;
-    public GameObject VROrigin;
     bool MenuActive = false;
-    float distance = 5;
     void Start()
     {
             MenuUI.SetActive(false);
@@ -23,13 +21,14 @@ public class OpenMenus : MonoBehaviour
             if(!MenuActive)
             {
                 MenuUI.SetActive(true);
-                // * Time.deltaTime;
-                MenuUI.transform.localPosition = Camera.transform.forward + new Vector3(0, 1, 0);
+                MenuUI.GetComponent<PauseMenu>().Pause();
+                MenuUI.transform.position = Camera.transform.forward  + Camera.transform.position ;
                 MenuUI.transform.rotation = new Quaternion(0, Camera.transform.rotation.y, 0, Camera.transform.rotation.w);
                 MenuActive = true;
             }
             else
             {
+                MenuUI.GetComponent<PauseMenu>().Resume();
                 MenuUI.SetActive(false);
                 MenuActive = false;
             }

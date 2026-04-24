@@ -1,16 +1,29 @@
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Locomotion.Turning;
 
 public class PauseMenu : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public SnapTurnProvider SnapTurn;
+    public ContinuousTurnProvider ContinuousTurn;
+    public void Pause()
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    }
+    public void Resume()
     {
-        
+
+    }
+    public void SetTypeFromIndex(int index)
+    {
+        if(index == 0)
+        {
+            SnapTurn.enabled = true;
+            ContinuousTurn.enabled = false;
+        }
+        else if(index == 1)
+        {
+            SnapTurn.enabled = false;
+            ContinuousTurn.enabled = true;
+        }
     }
 }
