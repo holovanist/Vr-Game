@@ -15,11 +15,11 @@ MonoBehaviour:
   m_LayerNames:
   - Default
   - Ray
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Belt Items
+  - Weapon
+  - Material
+  - potion
+  - Map
   - 
   - 
   - 
