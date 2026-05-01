@@ -1,3 +1,4 @@
+using Unity.Labs.SuperScience;
 using UnityEngine;
 
 public class Sword : MonoBehaviour
@@ -8,6 +9,11 @@ public class Sword : MonoBehaviour
     public float MaxTime;
     public float Damage;
     public Vector3 temp;
+    PhysicsTracker physicsTracker = new();
+    private void Start()
+    {
+        
+    }
     private void OnTriggerEnter(Collider other)
     {
         time = 0;
@@ -18,6 +24,7 @@ public class Sword : MonoBehaviour
             temp = GetTotalMeshFilterBounds(other.transform).size;
 
         }
+        //physicsTracker.
     }
     private void OnTriggerStay(Collider other)
     {
