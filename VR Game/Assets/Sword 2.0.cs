@@ -43,7 +43,8 @@ public class Sword2 : MonoBehaviour
         TrackingSword = false;
         //save the local exit position of the object
         //stop tracking speed and depth - done
-        //method to calculate and deal damage
+        //method to calculate and deal damage - done
+        CalculateDamage();
     }
     public void TrackSword()
     {
