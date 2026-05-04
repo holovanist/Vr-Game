@@ -3,14 +3,16 @@ using UnityEngine;
 
 public class Sword2 : MonoBehaviour
 {
-    public List<Vector3> PositionsinCreatures = new List<Vector3>();
+    public GameObject TipOfSword;
+    public List<Vector3> PositionsinCreaturesTip = new List<Vector3>();
     public List<float> Speed = new List<float>();
     public int maxListLength;
-    public float Trackinginterval;
+    public float TrackingInterval;
     float timer;
     float TimeInCreature;
     public bool TrackingSword = false;
     public float distance;
+    public float damage;
     private void Update()
     {
         if(TrackingSword)
@@ -24,8 +26,6 @@ public class Sword2 : MonoBehaviour
                 timer = 0;
         }
         //if statement to start tracking the speed and depth - done
-        //track the speed unneeded
-        //track the depth not needed
         //tracking where sword is in the object and every .25 seconds add a new point to a list - done
         //maximum of 50 - done
     }
@@ -34,7 +34,7 @@ public class Sword2 : MonoBehaviour
         TimeInCreature = 0;
         if (!other.gameObject.CompareTag("Enemy")) return;
         TrackingSword = true;
-        //save the local enter position of the object
+        //save the local enter position of the object - done
         //start tracking speed and depth - done
     }
     private void OnTriggerExit(Collider other)
@@ -44,37 +44,40 @@ public class Sword2 : MonoBehaviour
         //save the local exit position of the object
         //stop tracking speed and depth - done
         //method to calculate and deal damage - done
-        CalculateDamage();
+        distance = CalculateDamage();
+        damage *= distance;
     }
     public void TrackSword()
     {
         TimeInCreature += Time.deltaTime;
-        if (timer >= Trackinginterval)
+        if (timer >= TrackingInterval)
         {
-            if (PositionsinCreatures.Count < 50)
+            if (PositionsinCreaturesTip.Count < 50)
             {
-                PositionsinCreatures.Add(transform.position);
+                PositionsinCreaturesTip.Add(TipOfSword.transform.position);
             }
             else
             {
-                PositionsinCreatures[49] = transform.position;
+                PositionsinCreaturesTip[49] = TipOfSword.transform.position;
             }
+            timer = 0;
         }
     }
-    public void CalculateDamage()
+    public float CalculateDamage()
     {
-        for (int i = 0; i < PositionsinCreatures.Count - 1; i++)
+        float Distance = 0;
+        for (int i = 0; i < PositionsinCreaturesTip.Count - 1; i++)
         {
-            if (i != PositionsinCreatures.Count)
+            if (i != PositionsinCreaturesTip.Count)
             {
-                float a = Vector3.Distance(PositionsinCreatures[i], PositionsinCreatures[i + 1]);
-                distance += a;
+                float a = Vector3.Distance(PositionsinCreaturesTip[i], PositionsinCreaturesTip[i + 1]);
+                Distance += a;
             }
         }
         //get the distance between two points - done
         //get distance between the second and the thrid and reapeat this until all are done - done
         //damage calculations
-
-        PositionsinCreatures.Clear();
+        PositionsinCreaturesTip.Clear();
+        return Distance;
     }
 }

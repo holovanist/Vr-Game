@@ -1189,7 +1189,7 @@ GameObject:
   m_Component:
   - component: {fileID: 251231435}
   m_Layer: 6
-  m_Name: GameObject
+  m_Name: Tip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1204,7 +1204,7 @@ Transform:
   m_GameObject: {fileID: 251231434}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.8608, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1397,6 +1397,24 @@ MonoBehaviour:
   dashSpeed: 15
   dashDuration: 0.15
   dashCooldown: 2
+  volumeProfile: {fileID: 11400000, guid: 1195f9f7af9b0774c854f540ec0c4e37, type: 2}
+  volumeSettings:
+    active: 0
+    color:
+      m_OverrideState: 0
+      m_Value: {r: 0, g: 0, b: 0, a: 0}
+    center:
+      m_OverrideState: 0
+      m_Value: {x: 0, y: 0}
+    intensity:
+      m_OverrideState: 0
+      m_Value: 0
+    smoothness:
+      m_OverrideState: 0
+      m_Value: 0
+    rounded:
+      m_OverrideState: 0
+      m_Value: 0
 --- !u!1 &302990978
 GameObject:
   m_ObjectHideFlags: 0
@@ -1465,6 +1483,7 @@ Transform:
   m_Children:
   - {fileID: 1205616908}
   - {fileID: 652489809}
+  - {fileID: 832575519}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &302990982
@@ -1707,6 +1726,7 @@ GameObject:
   - component: {fileID: 389666481}
   - component: {fileID: 389666485}
   - component: {fileID: 389666486}
+  - component: {fileID: 389666487}
   m_Layer: 6
   m_Name: Long sword
   m_TagString: Untagged
@@ -1788,9 +1808,9 @@ MonoBehaviour:
   m_StartingInteractionStrengthFilters: []
   m_AutoFindParentInteractableInHierarchy: 0
   m_ParentInteractableObject: {fileID: 0}
-  m_AttachTransform: {fileID: 251231435}
+  m_AttachTransform: {fileID: 0}
   m_SecondaryAttachTransform: {fileID: 0}
-  m_UseDynamicAttach: 0
+  m_UseDynamicAttach: 1
   m_MatchAttachPosition: 1
   m_MatchAttachRotation: 1
   m_SnapToColliderVolume: 1
@@ -1900,12 +1920,13 @@ Transform:
   m_GameObject: {fileID: 389666480}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -5.774, y: 1.017, z: 5.609}
+  m_LocalPosition: {x: 0.283, y: 1.15, z: 0.132}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 907682195}
   - {fileID: 251231435}
+  - {fileID: 791413443}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &389666485
@@ -1915,7 +1936,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 389666480}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c9107f186bb2d849aa09e1a236b2e3f, type: 3}
   m_Name: 
@@ -1944,6 +1965,26 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.017, y: 0.91683275, z: 0.03}
   m_Center: {x: 0, y: 0.40841636, z: 0}
+--- !u!114 &389666487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389666480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e26df2236fcdb14d834fcc1761d3a17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sword2
+  TipOfSword: {fileID: 251231434}
+  PositionsinCreaturesTip: []
+  Speed: []
+  maxListLength: 0
+  TrackingInterval: 0
+  TrackingSword: 0
+  distance: 0
+  damage: 0
 --- !u!1 &393888865
 GameObject:
   m_ObjectHideFlags: 0
@@ -4097,6 +4138,37 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &791413442
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 791413443}
+  m_Layer: 6
+  m_Name: Middle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &791413443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791413442}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.452, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 389666484}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &797646613
 GameObject:
   m_ObjectHideFlags: 0
@@ -4552,12 +4624,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 832575517}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 302990981}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &833799724
 GameObject:
@@ -5903,12 +5975,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e26df2236fcdb14d834fcc1761d3a17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sword2
-  PositionsinCreatures: []
+  TipOfSword: {fileID: 0}
+  PositionsinCreaturesTip: []
   Speed: []
   maxListLength: 50
-  Trackinginterval: 0.25
+  TrackingInterval: 0
   TrackingSword: 0
   distance: 0
+  damage: 0
 --- !u!4 &1110626842 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5888765399538998960, guid: ad818c36731146e994540a1896ad8f24, type: 3}
@@ -6084,6 +6158,7 @@ Transform:
   - {fileID: 1966842166}
   - {fileID: 593276648}
   - {fileID: 297812908}
+  - {fileID: 1512405092}
   m_Father: {fileID: 302990981}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1213671263
@@ -7083,6 +7158,77 @@ MonoBehaviour:
   m_SocketScaleMode: 0
   m_FixedScale: {x: 1, y: 1, z: 1}
   m_TargetBoundsSize: {x: 1, y: 1, z: 1}
+--- !u!1 &1512405091
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1512405092}
+  - component: {fileID: 1512405094}
+  - component: {fileID: 1512405093}
+  m_Layer: 0
+  m_Name: Global Volume (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1512405092
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512405091}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.008400083, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1205616908}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1512405093
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512405091}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1512405094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512405091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 0
+  priority: 1
+  blendDistance: 1
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 1195f9f7af9b0774c854f540ec0c4e37, type: 2}
 --- !u!1 &1535885548
 GameObject:
   m_ObjectHideFlags: 0
@@ -10891,7 +11037,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 410087041}
-  - {fileID: 832575519}
   - {fileID: 413513165}
   - {fileID: 457778382}
   - {fileID: 302990981}

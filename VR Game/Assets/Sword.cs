@@ -44,7 +44,6 @@ public class Sword : MonoBehaviour
             timer = MaxTime;
         }
         float damageDelt = Damage * (distance);
-        Debug.Log(damageDelt);
     }
 
     private static Bounds GetTotalMeshFilterBounds(Transform objectTransform)
