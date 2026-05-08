@@ -15,6 +15,7 @@ public class Sword2 : MonoBehaviour
     public float damage;
     private void Update()
     {
+        //if statement to start tracking the sword - done
         if(TrackingSword)
         {
             timer += Time.deltaTime;
@@ -25,9 +26,6 @@ public class Sword2 : MonoBehaviour
             if (timer != 0)
                 timer = 0;
         }
-        //if statement to start tracking the speed and depth - done
-        //tracking where sword is in the object and every .25 seconds add a new point to a list - done
-        //maximum of 50 - done
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -40,18 +38,21 @@ public class Sword2 : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (!other.gameObject.CompareTag("Enemy")) return;
-        TrackingSword = false;
-        //save the local exit position of the object
         //stop tracking speed and depth - done
+        TrackingSword = false;
         //method to calculate and deal damage - done
         distance = CalculateDamage();
+        //damage calculations
         damage *= distance;
     }
     public void TrackSword()
     {
+        //save the local position of the object
         TimeInCreature += Time.deltaTime;
         if (timer >= TrackingInterval)
         {
+        //tracking where sword is in the object and every .25 seconds add a new point to a list - done
+        //maximum of 50 - done
             if (PositionsinCreaturesTip.Count < 50)
             {
                 PositionsinCreaturesTip.Add(TipOfSword.transform.position);
@@ -70,13 +71,12 @@ public class Sword2 : MonoBehaviour
         {
             if (i != PositionsinCreaturesTip.Count)
             {
+        //get the distance between two points - done
+        //get distance between the second and the thrid and reapeat this until all are done - done
                 float a = Vector3.Distance(PositionsinCreaturesTip[i], PositionsinCreaturesTip[i + 1]);
                 Distance += a;
             }
         }
-        //get the distance between two points - done
-        //get distance between the second and the thrid and reapeat this until all are done - done
-        //damage calculations
         PositionsinCreaturesTip.Clear();
         return Distance;
     }
