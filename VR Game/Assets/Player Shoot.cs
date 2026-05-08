@@ -11,7 +11,7 @@ public class PlayerShoot : MonoBehaviour
     public float ShootForce;
     public float UpwardForce, AbilityForce;
     [Header("Gun Stats")]
-    public float TimeBetweenShooting, Spread, ReloadTime, TimeBetweenShots;
+    public float TimeBetweenShooting, Spread, ReloadTime, TimeBetweenBullets;
     public int MagSize, BulletsPerTap;
     public int BulletsLeft { get; set; }
     public int BulletsAvalible;
@@ -24,7 +24,7 @@ public class PlayerShoot : MonoBehaviour
     public float TimeBetweenAbilities;
     public float saveCoolDown;
     public int Ability1Bullets;
-    bool Ability1Active, ReadyToActivate;
+    bool  ReadyToActivate;
     public bool SaveCoolDownActive { get; set; }
 
     [Header("Referance Objects")]
@@ -81,7 +81,7 @@ public class PlayerShoot : MonoBehaviour
                 AllowInvoke = false;
             }
             if (BulletsShot < BulletsPerTap && BulletsLeft > 0)
-                Invoke(nameof(Shoot), TimeBetweenShots);
+                Invoke(nameof(Shoot), TimeBetweenBullets);
             if (anim != null && !animationActive)
             {
                 anim.SetTrigger("shoot");
@@ -113,7 +113,7 @@ public class PlayerShoot : MonoBehaviour
                 }
             }
             if (BulletsShot < Ability1Bullets && BulletsLeft > 0)
-                Invoke(nameof(ShotgunShot), TimeBetweenShots);
+                Invoke(nameof(ShotgunShot), TimeBetweenBullets);
         }
     }
     public void Shoot(float force)

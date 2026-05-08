@@ -563,6 +563,7 @@ GameObject:
   - component: {fileID: 111457576}
   - component: {fileID: 111457575}
   - component: {fileID: 111457574}
+  - component: {fileID: 111457578}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -663,6 +664,42 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &111457578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111457573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fa9d505bdb99e84088635f85b5035cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerShoot
+  ShootForce: 1
+  UpwardForce: 1
+  AbilityForce: 1
+  TimeBetweenShooting: 0
+  Spread: 1
+  ReloadTime: 1
+  TimeBetweenBullets: 0
+  MagSize: 1000
+  BulletsPerTap: 10
+  BulletsAvalible: 1000
+  AutoReload: 1
+  TimeBetweenAbilities: 0
+  saveCoolDown: 0
+  Ability1Bullets: 10
+  Cam: {fileID: 0}
+  AttackPoint: {fileID: 0}
+  CoolDownCounter: {fileID: 0}
+  AllowInvoke: 1
+  AllowInvokeAbility: 1
+  animationActive: 0
+  animationActiveAbility: 0
+  MuzzleFlash: {fileID: 0}
+  AmmoDisplay: {fileID: 0}
+  testAbility: 0
 --- !u!1001 &113744349
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4549,7 +4586,7 @@ MonoBehaviour:
   m_Mediator: {fileID: 0}
   m_TransformationPriority: 0
   m_MoveSpeed: 5
-  m_InAirControlModifier: 0.5
+  m_InAirControlModifier: -0.3
   m_EnableStrafe: 1
   m_EnableFly: 0
   m_ForwardSource: {fileID: 1966842166}
@@ -5999,6 +6036,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6803edce0201f574f923fd9d10e5b30a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1119791756
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1119791758}
+  - component: {fileID: 1119791757}
+  m_Layer: 0
+  m_Name: Object Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1119791757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119791756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0c3d7f20626c85488e4b003a71d7e3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectPooling
+  pooledObjects: []
+  objectToPool: {fileID: 6203379121662253678, guid: eadc09d9f27fa2744bfa7c11240319fe, type: 3}
+  amountToPool: 200
+  parentTransform: {fileID: 1119791758}
+--- !u!4 &1119791758
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119791756}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1130308173 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8270855663187062767, guid: 1392f805216c47742996d4742c80721c, type: 3}
@@ -8831,6 +8916,7 @@ GameObject:
   - component: {fileID: 1949757437}
   - component: {fileID: 1949757436}
   - component: {fileID: 1949757435}
+  - component: {fileID: 1949757442}
   m_Layer: 6
   m_Name: Grabbable Cube 2 point Attach Transform
   m_TagString: Untagged
@@ -9113,6 +9199,42 @@ Transform:
   - {fileID: 909664154}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1949757442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1949757434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fa9d505bdb99e84088635f85b5035cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerShoot
+  ShootForce: 0
+  UpwardForce: 0
+  AbilityForce: 0
+  TimeBetweenShooting: 0
+  Spread: 0
+  ReloadTime: 0
+  TimeBetweenBullets: 0
+  MagSize: 0
+  BulletsPerTap: 0
+  BulletsAvalible: 0
+  AutoReload: 1
+  TimeBetweenAbilities: 0
+  saveCoolDown: 0
+  Ability1Bullets: 0
+  Cam: {fileID: 0}
+  AttackPoint: {fileID: 0}
+  CoolDownCounter: {fileID: 0}
+  AllowInvoke: 1
+  AllowInvokeAbility: 1
+  animationActive: 0
+  animationActiveAbility: 0
+  MuzzleFlash: {fileID: 0}
+  AmmoDisplay: {fileID: 0}
+  testAbility: 0
 --- !u!1 &1966842165
 GameObject:
   m_ObjectHideFlags: 0
@@ -11063,3 +11185,4 @@ SceneRoots:
   - {fileID: 788813233}
   - {fileID: 1931710296}
   - {fileID: 111457577}
+  - {fileID: 1119791758}
