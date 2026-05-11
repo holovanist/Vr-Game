@@ -30,8 +30,10 @@ namespace player
                     Destroy(this.gameObject);
                 }
                 else
-                gameObject.GetComponent<MeshRenderer>().enabled = false;
-                gameObject.GetComponent<SphereCollider>().enabled = false;
+                {
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<SphereCollider>().enabled = false;
+                }
                 //gameObject.SetActive(false);
                 Timer = 0;
             }

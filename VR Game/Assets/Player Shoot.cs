@@ -28,7 +28,7 @@ public class PlayerShoot : MonoBehaviour
     public bool SaveCoolDownActive { get; set; }
 
     [Header("Referance Objects")]
-    public Camera Cam;
+    public Transform Cam;
     public Transform AttackPoint;
     public TextMeshProUGUI CoolDownCounter;
 
@@ -43,7 +43,7 @@ public class PlayerShoot : MonoBehaviour
     public GameObject MuzzleFlash;
     public TextMeshProUGUI AmmoDisplay;
 
-    public bool testAbility;
+    public bool Test;
     public void Awake()
     {
         BulletsLeft = MagSize;
@@ -58,6 +58,13 @@ public class PlayerShoot : MonoBehaviour
 
     void Update()
     {
+        if(Test)
+        {
+            CallShoot();
+            Shoot(ShootForce);
+            Test = false;
+        }
+
         if(CoolDownCounter != null)
         CoolDownCounter.SetText(String.Format("{0:0.00}", saveCoolDown));
         if (AutoReload)
@@ -94,7 +101,6 @@ public class PlayerShoot : MonoBehaviour
         if (ReadyToActivate && !Reloading && BulletsLeft > Ability1Bullets)
         {
             BulletsShot = 0;
-            testAbility = false;
             ReadyToActivate = false;
             Shoot(AbilityForce);
             if (anim != null && !animationActiveAbility)
@@ -116,12 +122,13 @@ public class PlayerShoot : MonoBehaviour
                 Invoke(nameof(ShotgunShot), TimeBetweenBullets);
         }
     }
+
     public void Shoot(float force)
     {
-        Ray ray = Cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        Ray ray = new();
 
         Vector3 targetPoint;
-        if (Physics.Raycast(ray, out RaycastHit hit)) targetPoint = hit.point;
+        if (Physics.Raycast(Cam.position, AttackPoint.forward , out RaycastHit hit)) targetPoint = hit.point;
         else targetPoint = ray.GetPoint(75);
         Vector3 directionWithoutSpread = targetPoint - AttackPoint.position;
         float x = Random.Range(-Spread, Spread);
@@ -130,8 +137,9 @@ public class PlayerShoot : MonoBehaviour
         GameObject currentBullet = ObjectPooling.SharedInstance.GetPooledObject();
         if (currentBullet != null)
         {
-            currentBullet.transform.SetPositionAndRotation(AttackPoint.transform.position, AttackPoint.transform.rotation);
             //currentBullet.SetActive(true);
+            currentBullet.transform.SetPositionAndRotation(AttackPoint.transform.localPosition, AttackPoint.transform.localRotation);
+            currentBullet.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
             currentBullet.GetComponent<MeshRenderer>().enabled = true;
             currentBullet.GetComponent<SphereCollider>().enabled = true;
             currentBullet.transform.forward = directionWithSpread.normalized;
@@ -189,5 +197,10 @@ public class PlayerShoot : MonoBehaviour
             }
         }
         Reloading = false;
+    }
+    private void OnDrawGizmos()
+    {
+        Physics.Raycast(Cam.position, AttackPoint.forward, out RaycastHit hit);
+        Gizmos.DrawLine(AttackPoint.position, hit.point);
     }
 }
