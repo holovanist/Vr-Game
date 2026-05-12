@@ -4,8 +4,8 @@ using UnityEngine;
 public class Sword2 : MonoBehaviour
 {
     public GameObject TipOfSword;
-    public List<Vector3> PositionsinCreaturesTip = new List<Vector3>();
-    public List<float> Speed = new List<float>();
+    public List<Vector3> PositionsinCreaturesTip = new();
+    public List<float> Speed = new();
     public int maxListLength;
     public float TrackingInterval;
     float timer;

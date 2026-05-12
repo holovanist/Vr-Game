@@ -5,6 +5,10 @@ using Random = UnityEngine.Random;
 
 public class PlayerShoot : MonoBehaviour
 {
+    private static readonly int Ability1Hash = Animator.StringToHash("ability1");
+    private static readonly int ReloadHash = Animator.StringToHash("reload");
+    private static readonly int ShootHash = Animator.StringToHash("shoot");
+
     //fix the shootDir{
     //[Header("Input")]
     [Header("Bullet settings")]
@@ -16,7 +20,7 @@ public class PlayerShoot : MonoBehaviour
     public int BulletsLeft { get; set; }
     public int BulletsAvalible;
     int BulletsShot;
-    bool Shooting, ReadyToShoot;
+    bool ReadyToShoot;
     public bool Reloading { get; set; }
     public bool AutoReload = true;
 
@@ -37,7 +41,7 @@ public class PlayerShoot : MonoBehaviour
     public bool AllowInvokeAbility = true;
     public bool animationActive;
     public bool animationActiveAbility;
-    Animator anim;
+    public Animator anim;
 
     [Header("Graphics")]
     public GameObject MuzzleFlash;
@@ -68,7 +72,7 @@ public class PlayerShoot : MonoBehaviour
         if(CoolDownCounter != null)
         CoolDownCounter.SetText(String.Format("{0:0.00}", saveCoolDown));
         if (AutoReload)
-            if (ReadyToShoot && Shooting && !Reloading && BulletsLeft <= 0) Reload();
+            if (ReadyToShoot  && !Reloading && BulletsLeft <= 0) Reload();
         if (AmmoDisplay != null)
             AmmoDisplay.SetText(BulletsLeft / BulletsPerTap + " / " + BulletsAvalible / BulletsPerTap);
         if (SaveCoolDownActive)
@@ -76,7 +80,7 @@ public class PlayerShoot : MonoBehaviour
     }
     public void CallShoot()
     {
-        if (ReadyToShoot && Shooting && !Reloading && BulletsLeft > 0)
+        if (ReadyToShoot && !Reloading && BulletsLeft > 0)
         {
             BulletsShot = 0;
             ReadyToShoot = false;
@@ -91,7 +95,7 @@ public class PlayerShoot : MonoBehaviour
                 Invoke(nameof(Shoot), TimeBetweenBullets);
             if (anim != null && !animationActive)
             {
-                anim.SetTrigger("shoot");
+                anim.SetTrigger(ShootHash);
                 animationActive = true;
             }
         }
@@ -105,7 +109,7 @@ public class PlayerShoot : MonoBehaviour
             Shoot(AbilityForce);
             if (anim != null && !animationActiveAbility)
             {
-                anim.SetTrigger("ability1");
+                anim.SetTrigger(Ability1Hash);
                 animationActiveAbility = true;
             }
             if (AllowInvokeAbility)
@@ -123,9 +127,10 @@ public class PlayerShoot : MonoBehaviour
         }
     }
 
+    public GameObject currentBullet;
     public void Shoot(float force)
     {
-        Ray ray = new();
+        Ray ray = new(Cam.position, AttackPoint.forward);
 
         Vector3 targetPoint;
         if (Physics.Raycast(Cam.position, AttackPoint.forward , out RaycastHit hit)) targetPoint = hit.point;
@@ -134,23 +139,26 @@ public class PlayerShoot : MonoBehaviour
         float x = Random.Range(-Spread, Spread);
         float y = Random.Range(-Spread, Spread);
         Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0);
-        GameObject currentBullet = ObjectPooling.SharedInstance.GetPooledObject();
+        currentBullet = ObjectPooling.SharedInstance.GetPooledObject();
         if (currentBullet != null)
         {
             //currentBullet.SetActive(true);
-            currentBullet.transform.SetPositionAndRotation(AttackPoint.transform.localPosition, AttackPoint.transform.localRotation);
+            currentBullet.GetComponent<Rigidbody>().position = AttackPoint.position;
+            currentBullet.GetComponent<Rigidbody>().rotation = AttackPoint.rotation;
+            //currentBullet.transform.rotation = AttackPoint.rotation;
             currentBullet.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+            currentBullet.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             currentBullet.GetComponent<MeshRenderer>().enabled = true;
             currentBullet.GetComponent<SphereCollider>().enabled = true;
             currentBullet.transform.forward = directionWithSpread.normalized;
+            currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * force, ForceMode.Impulse);
+            currentBullet.GetComponent<Rigidbody>().AddForce(Cam.transform.up * UpwardForce, ForceMode.Impulse);
         }
-        currentBullet.transform.forward = directionWithSpread.normalized;
-        currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * force, ForceMode.Impulse);
-        currentBullet.GetComponent<Rigidbody>().AddForce(Cam.transform.up * UpwardForce, ForceMode.Impulse);
         if (MuzzleFlash != null)
             Instantiate(MuzzleFlash, AttackPoint.position, Quaternion.identity);
         BulletsLeft--;
         BulletsShot++;
+        //currentBullet = null;
     }
     private void ResetAbility()
     {
@@ -169,7 +177,7 @@ public class PlayerShoot : MonoBehaviour
     private void Reload()
     {
         if(anim != null)
-        anim.SetTrigger("reload");
+        anim.SetTrigger(ReloadHash);
         Reloading = true;
         if (Reloading) Invoke(nameof(ReloadFinished), ReloadTime);
     }
@@ -198,9 +206,12 @@ public class PlayerShoot : MonoBehaviour
         }
         Reloading = false;
     }
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
-        Physics.Raycast(Cam.position, AttackPoint.forward, out RaycastHit hit);
-        Gizmos.DrawLine(AttackPoint.position, hit.point);
+        Vector3 targetPoint;
+        Ray ray = new Ray(Cam.position, AttackPoint.forward);
+        if (Physics.Raycast(Cam.position, AttackPoint.forward, out RaycastHit hit)) targetPoint = hit.point;
+        else targetPoint = ray.GetPoint(75);
+        Gizmos.DrawLine(AttackPoint.position, targetPoint);
     }
 }

@@ -4231,7 +4231,7 @@ Transform:
   m_GameObject: {fileID: 788813229}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.556, y: 1.5, z: 5.19}
+  m_LocalPosition: {x: 2.556, y: 1.5, z: 1.9}
   m_LocalScale: {x: 3, y: 1, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4670,7 +4670,7 @@ MonoBehaviour:
   m_Mediator: {fileID: 0}
   m_TransformationPriority: 0
   m_MoveSpeed: 5
-  m_InAirControlModifier: -0.3
+  m_InAirControlModifier: 1
   m_EnableStrafe: 1
   m_EnableFly: 0
   m_ForwardSource: {fileID: 1966842166}
@@ -9010,6 +9010,7 @@ GameObject:
   - component: {fileID: 1861182171}
   - component: {fileID: 1861182170}
   - component: {fileID: 1861182169}
+  - component: {fileID: 1861182176}
   m_Layer: 0
   m_Name: Grabbable Cube 2 point Attach Transform
   m_TagString: Untagged
@@ -9074,7 +9075,7 @@ MonoBehaviour:
   m_InteractionManager: {fileID: 0}
   m_Colliders: []
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 8
   m_DistanceCalculationMode: 1
   m_SelectMode: 1
   m_FocusMode: 1
@@ -9125,9 +9126,9 @@ MonoBehaviour:
   m_Activated:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: interactTest, Assembly-CSharp
-        m_MethodName: Interact
+      - m_Target: {fileID: 1861182174}
+        m_TargetAssemblyTypeName: PlayerShoot, Assembly-CSharp
+        m_MethodName: CallShoot
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9222,7 +9223,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -9251,11 +9252,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fa9d505bdb99e84088635f85b5035cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShoot
-  ShootForce: 1
+  ShootForce: 4
   UpwardForce: 0
   AbilityForce: 1
   TimeBetweenShooting: 0
-  Spread: 5
+  Spread: 0
   ReloadTime: 2
   TimeBetweenBullets: 0
   MagSize: 1000
@@ -9272,9 +9273,11 @@ MonoBehaviour:
   AllowInvokeAbility: 1
   animationActive: 0
   animationActiveAbility: 0
+  anim: {fileID: 0}
   MuzzleFlash: {fileID: 0}
   AmmoDisplay: {fileID: 0}
   Test: 0
+  currentBullet: {fileID: 0}
 --- !u!4 &1861182175
 Transform:
   m_ObjectHideFlags: 0
@@ -9294,6 +9297,29 @@ Transform:
   - {fileID: 1753848069}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &1861182176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861182168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a1302d0d134fa8a2a5b3bf4aec3c20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Transformers.XRGeneralGrabTransformer
+  m_PermittedDisplacementAxes: -1
+  m_ConstrainedAxisDisplacementMode: 1
+  m_TwoHandedRotationMode: 1
+  m_AllowOneHandedScaling: 0
+  m_AllowTwoHandedScaling: 0
+  m_OneHandedScaleSpeed: 0.5
+  m_ThresholdMoveRatioForScale: 0.05
+  m_ClampScaling: 1
+  m_MinimumScaleRatio: 0.25
+  m_MaximumScaleRatio: 2
+  m_ScaleMultiplier: 0.25
 --- !u!1 &1931710292
 GameObject:
   m_ObjectHideFlags: 0
@@ -9727,13 +9753,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1961640688}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -1.53, z: -0.41}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.00000029802322, y: -1.53, z: -0.4099999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1861182175}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1966842165
 GameObject:
   m_ObjectHideFlags: 0

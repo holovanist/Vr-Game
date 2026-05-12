@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.XR.Interaction.Toolkit.Locomotion.Movement;
 
 public class VRDash : MonoBehaviour
 {
@@ -101,7 +100,7 @@ public class VRDash : MonoBehaviour
 
         if (dashTime > 0)
         {
-            controller.Move(dashDirection * dashSpeed * Time.deltaTime);
+            controller.Move(dashSpeed * Time.deltaTime * dashDirection);
             dashTime -= Time.deltaTime;
         }
         else if(dashTime <= 0)

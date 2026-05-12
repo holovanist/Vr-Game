@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class interactTest : MonoBehaviour
+public class InteractTest : MonoBehaviour
 {
     public void Interact()
     {
