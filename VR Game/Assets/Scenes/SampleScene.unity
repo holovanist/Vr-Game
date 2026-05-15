@@ -1484,8 +1484,8 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: -6910057490466886376, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  dashSpeed: 15
-  dashDuration: 0.15
+  dashSpeed: 12
+  dashDuration: 0.5
   dashCooldown: 2
   volumeProfile: {fileID: 11400000, guid: 1195f9f7af9b0774c854f540ec0c4e37, type: 2}
   volumeSettings:
